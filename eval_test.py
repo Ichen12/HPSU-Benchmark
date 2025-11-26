@@ -15,7 +15,7 @@ from prompt.JB_eval        import evaluate_answer_with_client as eval_jb
 
 def parse_args():
     p = argparse.ArgumentParser()
-    p.add_argument('--api_key', type=str, default='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')
+    p.add_argument('--api_key', type=str, default='')
     p.add_argument('--base_url', type=str, default='https://openrouter.ai/api/v1')
     p.add_argument('--model', type=str, default='google/gemini-2.5-flash')
     p.add_argument('--input_json', type=str, default='HPSU_test_data.json')
