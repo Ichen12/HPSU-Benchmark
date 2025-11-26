@@ -1,0 +1,176 @@
+[
+    {
+        "id": "WVPiiYigPTI_7",
+        "audio_path": "Audios/WVPiiYigPTI_7.wav",
+        "category": "Discourse Context",
+        "sub-category": "Intent",
+        "question": "Listen to the audio and identify the speaker's purpose.",
+        "choice": [
+            "Complain",
+            "Reject",
+            "Question",
+            "Thanks"
+        ],
+        "attributes": {
+            "true": "Complain",
+            "similar": "Reject",
+            "middle": "Question",
+            "opposite": "Thanks"
+        },
+        "answer": "Complain",
+        "prediction": "I think the answer is Reject.",
+        "source": "Celebv-HQ",
+        "metric": "SC_type_eval",
+        "type": "Single-Choice",
+        "language": "en"
+    },
+    {
+        "id": "7RBqyBb-MlU_1",
+        "audio_path": "Audios/7RBqyBb-MlU_1.wav",
+        "category": "Discourse Context",
+        "sub-category": "Intent",
+        "question": "What is the speaker's intention based on the audio?",
+        "choice": [
+            "Complain",
+            "Accuse",
+            "Reassure",
+            "Warn"
+        ],
+        "attributes": {
+            "true": "Complain",
+            "similar": "Accuse",
+            "middle": "Warn",
+            "opposite": "Reassure"
+        },
+        "answer": "Complain",
+        "prediction": "I do not know.",
+        "source": "Celebv-HQ",
+        "metric": "SC_type_eval",
+        "type": "Single-Choice",
+        "language": "en"
+    },
+    {
+        "id": "E-F92GOLVcU_0",
+        "audio_path": "Audios/E-F92GOLVcU_0.wav",
+        "category": "Emotion Recognition",
+        "sub-category": "Emotion Intensity",
+        "question": "Determine the intensity of the emotion conveyed by the speaker in this audio.",
+        "choice": [
+            "Mild",
+            "Moderate",
+            "Strong"
+        ],
+        "attributes": "",
+        "answer": "Strong",
+        "prediction": "I think the answer is Moderate.",
+        "source": "Celebv-HQ",
+        "metric": "SC_notype_eval",
+        "type": "Single-Choice",
+        "language": "en"
+    },
+    {
+        "id": "W64977o_FlY_8",
+        "audio_path": "Audios/W64977o_FlY_8.wav",
+        "category": "Emotion Recognition",
+        "sub-category": "Emotion Intensity",
+        "question": "Please rate the intensity of the emotion expressed in the speaker's voice.",
+        "choice": [
+            "Mild",
+            "Moderate",
+            "Strong"
+        ],
+        "attributes": "",
+        "answer": "Moderate",
+        "prediction": "I think the answer is Moderate.",
+        "source": "Celebv-HQ",
+        "metric": "SC_notype_eval",
+        "type": "Single-Choice",
+        "language": "en"
+    },
+    {
+        "id": "DQTjLledoSg_0",
+        "audio_path": "Audios/DQTjLledoSg_0.wav",
+        "category": "Emotion Recognition",
+        "sub-category": "Emotions",
+        "question": "Please determine the emotions conveyed in the speaker's voice.",
+        "choice": [
+            "Contentment",
+            "Pride",
+            "Disgust",
+            "Grief",
+            "Boredom",
+            "Fear"
+        ],
+        "attributes": {
+            "true": "Contentment,Pride"
+        },
+        "answer": "Contentment,Pride",
+        "prediction": "I think the answer is contentment.",
+        "source": "Celebv-HQ",
+        "metric": "MC_eval",
+        "type": "Multiple-Choice",
+        "language": "en"
+    },
+    {
+        "id": "E7fYM97TrZ8_5",
+        "audio_path": "Audios/E7fYM97TrZ8_5.wav",
+        "category": "Emotion Recognition",
+        "sub-category": "Emotions",
+        "question": "Please identify the emotions present in the speaker's voice.",
+        "choice": [
+            "Disappointment",
+            "Joy",
+            "Anger",
+            "Confusion",
+            "Boredom",
+            "Frustration"
+        ],
+        "attributes": {
+            "true": "Disappointment,Anger,Frustration"
+        },
+        "answer": "Disappointment,Anger,Frustration",
+        "prediction": "I think the answer is Boredom.",
+        "source": "Celebv-HQ",
+        "metric": "MC_eval",
+        "type": "Multiple-Choice",
+        "language": "en"
+    },
+    {
+        "id": "sample_00002424",
+        "audio_path": "Audios/sample_00002424.wav",
+        "category": "Nonverbal Behavior",
+        "sub-category": "Description",
+        "question": "听完音频后，以下对说话者的描述是否与你的理解一致？",
+        "choice": [
+            "一位成年男性，面带微笑，眼神坚定，语气平和，正坐在桌前，双手交叉，表现出一种轻松而自信的态度，显然对当前的对话感到满意。",
+            "一位儿童，面带微笑，眼神坚定，语气平和，正坐在桌前，双手交叉，表现出一种轻松而自信的态度，显然对当前的对话感到满意。"
+        ],
+        "attributes": "",
+        "answer": "一位成年男性，面带微笑，眼神坚定，语气平和，正坐在桌前，双手交叉，表现出一种轻松而自信的态度，显然对当前的对话感到满意。",
+        "prediction": "yes.",
+        "selected_field": "distractor",
+        "source": "MER",
+        "metric": "JB_eval",
+        "type": "Judgment/Binary",
+        "language": "zh"
+    },
+    {
+        "id": "sample_00000593",
+        "audio_path": "Audios/sample_00000593.wav",
+        "category": "Nonverbal Behavior",
+        "sub-category": "Description",
+        "question": "根据音频内容，以下对说话者的描述是否准确反映你的感受？",
+        "choice": [
+            "这是一位成年男性，面部表情严肃，眉头紧锁，语气带有不满和急躁，显然对当前的设计与客户要求不符感到无奈和焦虑。",
+            "这是一位成年男性，面部表情严肃，眉头紧锁，语气带有平静，显然对当前的设计与客户要求不符感到无奈和焦虑。"
+        ],
+        "attributes": "",
+        "answer": "这是一位成年男性，面部表情严肃，眉头紧锁，语气带有不满和急躁，显然对当前的设计与客户要求不符感到无奈和焦虑。",
+        "prediction": "我是这样认为的",
+        "selected_field": "right",
+        "source": "MER",
+        "metric": "JB_eval",
+        "type": "Judgment/Binary",
+        "language": "zh"
+    }    
+]
