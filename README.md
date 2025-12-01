@@ -1,2 +1,2 @@
 # HPSU-Benchmark
-HPSU: A Benchmark for Human-Level Perception in Real-World Spoken Speech Understanding
+HPSU: A Benchmark for Human-Level Perception in Real-World Spoken Speech Understanding.
