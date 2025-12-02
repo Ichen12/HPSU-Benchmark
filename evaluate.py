@@ -6,7 +6,6 @@ import os
 import time
 from typing import List, Dict, Any, Tuple
 
-# ===== 统一使用 en 版本接口 =====
 from prompt.SC_notype_eval import create_client as create_client_notype, evaluate_answer_with_client as eval_notype
 from prompt.SC_type_eval   import evaluate_answer_with_client as eval_type
 from prompt.MC_eval        import evaluate_answer_with_client as eval_mc
@@ -16,9 +15,9 @@ from prompt.JB_eval        import evaluate_answer_with_client as eval_jb
 def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument('--api_key', type=str, default='')
-    p.add_argument('--base_url', type=str, default='https://openrouter.ai/api/v1')
-    p.add_argument('--model', type=str, default='google/gemini-2.5-flash')
-    p.add_argument('--input_json', type=str, default='HPSU_test_data.json')
+    p.add_argument('--base_url', type=str, default='')
+    p.add_argument('--model', type=str, default='')
+    p.add_argument('--input_json', type=str, default='')
     p.add_argument('--output_json', type=str, default='result.json')
     p.add_argument('--output_csv', type=str, default='')
     p.add_argument('--retries', type=int, default=2)
@@ -86,7 +85,7 @@ def _add_score(stats: Dict[str, Dict[str, float]], key: str, add_score: float):
     if not key:
         key = "UNKNOWN"
     if key not in stats:
-        stats[key] = {"total": 0, "score": 0.0}  # score 先存 raw 分数，后面再转百分比
+        stats[key] = {"total": 0, "score": 0.0} 
     stats[key]["total"] += 1
     stats[key]["score"] += add_score
 
@@ -95,7 +94,6 @@ def run_eval(api_key: str, base_url: str, model: str,
              data: List[Dict[str, Any]],
              retries: int = 2, sleep_on_error: float = 1.5) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
 
-    # ===== client：统一用 en 版本（可重复用于所有 metric） =====
     client_en = create_client_notype(api_key=api_key, base_url=base_url)
 
     items_notype = [s for s in data if is_sc_notype(s)]
