@@ -16,11 +16,23 @@ An example:
 
 In addition to the benchmark, we release **HPSC (Human-level Perception Spoken Speech Caption)**, a high-quality dataset of 50,000 speech-description pairs to facilitate the training of stronger Speech LLMs.
 
-## 📊 Benchmark Main Results
+## 📊 Main Results
 
 We evaluated a total of 13 open-source and proprietary audio models (e.g., Qwen2.5-Omni and Gemini 2.5 Pro); the native GPT-4o audio model was excluded because it refused to answer a large portion of our queries. For comparison, we adopted three baselines: a Human upper bound derived from large-scale native-speaker annotations, a Random Guess chance-level baseline, and a Whisper+GPT cascade that feeds Whisper transcriptions into GPT-4o to isolate the performance gains attributable to acoustic modeling.
 
 ![Main_Reaults](fig/main_results.png)
+
+## 🧠 Method: Construction Pipeline
+
+The construction of HPSU involves a three-stage semi-automatic pipeline:
+
+1. **Data Collection:** Sourced from diverse video corpora (CelebV-HQ, MELD, etc.) and preprocessed with speech enhancement tools.
+
+2. **Information Extraction:** Utilizes LLMs and Audio/Visual models to extract multi-perspective descriptions.
+
+3. **Fusion & Verification:** Synthesizes information into triplets and undergoes strict human verification.
+
+![pipeline](fig/pipeline.png)
 
 ## 🚀 Getting Started
 
@@ -39,18 +51,6 @@ python evaluate.py \
 - ``--base_url``: The API endpoint URL for the judge model.
 - ``--model``: The identifier for the automated judge/evaluator used to score the predictions.
 - ``--input_json``: Path to the file containing your model's predictions.
-
-## 🧠 Method: Construction Pipeline
-
-The construction of HPSU involves a three-stage semi-automatic pipeline:
-
-1. **Data Collection:** Sourced from diverse video corpora (CelebV-HQ, MELD, etc.) and preprocessed with speech enhancement tools.
-
-2. **Information Extraction:** Utilizes LLMs and Audio/Visual models to extract multi-perspective descriptions.
-
-3. **Fusion & Verification:** Synthesizes information into triplets and undergoes strict human verification.
-
-![pipeline](fig/pipeline.png)
 
 ## 📝 Citation
 If you find HPSU or HPSC useful for your research, please cite our paper:

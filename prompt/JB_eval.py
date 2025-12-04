@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
-# 路径: /data/lichen/A_benchmark/improve/code/eval/en/JB_eval.py
+"""
+JB Evaluation Module
+
+This module evaluates a model's ability to distinguish between "right" content
+and "distractor" content based on a "yes/no" judgment. It uses the OpenAI API
+with structured outputs (Pydantic) to ensure reliable parsing.
+"""
+
 import argparse
 import json
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 from openai import OpenAI
 from pydantic import BaseModel, ValidationError
 
+# Template used to construct the prompt for the evaluator model.
 PROMPT_TEMPLATE = """
 [Question]
 {question}
@@ -44,21 +52,49 @@ Do not output anything else.
 """
 
 class EvaluationResult(BaseModel):
+    """
+    Schema for the structured output from the LLM.
+    Enforces that the result contains an 'isright' field.
+    """
     isright: str
 
-def create_client(api_key: str, base_url: str = 'https://api.openai-proxy.org/v1') -> OpenAI:
+
+def create_client(api_key: str, base_url: Optional[str] = None) -> OpenAI:
+    """
+    Initializes and returns an OpenAI client.
+    
+    Args:
+        api_key: The API key for authentication.
+        base_url: Optional custom base URL (e.g., for proxies).
+    """
     return OpenAI(api_key=api_key, base_url=base_url)
+
 
 def evaluate_answer_with_client(client: OpenAI,
                                 model: str,
                                 question: str,
                                 selected_field: str,
                                 prediction: str) -> Dict[str, Any]:
+    """
+    Evaluates a single prediction using an LLM.
+
+    Args:
+        client: The OpenAI client instance.
+        model: The name of the model to use for evaluation.
+        question: The original question text.
+        selected_field: Indicates if the target is 'right' or 'distractor'.
+        prediction: The model's answer ('yes', 'no', or equivalent).
+
+    Returns:
+        A dictionary containing the evaluation result (e.g., {"isright": "right"})
+        or an explanation if an error occurred.
+    """
     prompt = PROMPT_TEMPLATE.format(
         question=question,
         selected_field=selected_field,
         prediction=prediction
     )
+    
     try:
         completion = client.beta.chat.completions.parse(
             model=model,
@@ -66,29 +102,54 @@ def evaluate_answer_with_client(client: OpenAI,
             response_format=EvaluationResult,
         )
         parsed = completion.choices[0].message.parsed
-        return {"isright": parsed.isright}
+        # Verify parsed is not None (though Pydantic usually guarantees validity or raises error)
+        if parsed:
+            return {"isright": parsed.isright}
+        else:
+            return {"isright": "wrong", "explanation": "Empty response from model."}
+            
     except ValidationError as ve:
-        return {"isright": "wrong", "explanation": f"结构化输出验证失败: {ve}"}
+        return {
+            "isright": "wrong", 
+            "explanation": f"Structured output validation failed: {ve}"
+        }
     except Exception as e:
-        return {"isright": "wrong", "explanation": f"API 调用失败: {str(e)}"}
+        return {
+            "isright": "wrong", 
+            "explanation": f"API call failed: {str(e)}"
+        }
 
-# 可选：命令行单条调试
-def _parse_args():
-    import argparse
-    p = argparse.ArgumentParser(description='评估模型对于 right/distractor 的理解（JB_eval 单条）')
-    p.add_argument('--api_key', type=str, required=True)
-    p.add_argument('--base_url', type=str, default='https://api.openai-proxy.org/v1')
-    p.add_argument('--model', type=str, default='gemini-2.0-flash-001')
-    p.add_argument('--pre', type=str, required=True)
-    p.add_argument('--question', type=str, required=True)
-    p.add_argument('--selected_field', type=str, required=True)
-    return p.parse_args()
+
+def _parse_args() -> argparse.Namespace:
+    """Parses command line arguments for standalone execution."""
+    parser = argparse.ArgumentParser(
+        description='Evaluate model understanding of right/distractor (JB_eval single item)'
+    )
+    parser.add_argument('--api_key', type=str, required=True, help='OpenAI API Key')
+    parser.add_argument('--base_url', type=str, default=None, help='API Base URL')
+    parser.add_argument('--model', type=str, default='', help='Evaluator model name')
+    parser.add_argument('--prediction', type=str, required=True, help='The model prediction to evaluate')
+    parser.add_argument('--question', type=str, required=True, help='The question text')
+    parser.add_argument('--selected_field', type=str, required=True, help='The field type (right/distractor)')
+    
+    return parser.parse_args()
+
 
 def main():
+    """Main entry point for command-line testing."""
     args = _parse_args()
     client = create_client(args.api_key, args.base_url)
-    result = evaluate_answer_with_client(client, args.model, args.question, args.selected_field, args.pre)
+    
+    result = evaluate_answer_with_client(
+        client=client, 
+        model=args.model, 
+        question=args.question, 
+        selected_field=args.selected_field, 
+        prediction=args.prediction
+    )
+    
     print(json.dumps(result, ensure_ascii=False, indent=2))
+
 
 if __name__ == '__main__':
     main()
