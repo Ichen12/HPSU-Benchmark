@@ -1,6 +1,6 @@
 # HPSU: A Benchmark for Human-Level Perception in Real-World Spoken Speech Understanding
 
-[![Paper](https://img.shields.io/badge/Paper-Arxiv-red)](https://arxiv.org/abs/2511.23178) [![HPSU Audio Download](https://img.shields.io/badge/HPSU_Audio_Download-HuggingFace-yellow)](https://huggingface.co/)
+[![Paper](https://img.shields.io/badge/Paper-Arxiv-red)](https://arxiv.org/abs/2511.23178) [![HPSU Audio Download](https://img.shields.io/badge/HPSU_Audio_Download-HuggingFace-yellow)](https://huggingface.co/datasets/Lewis996/HPSU)
 
 ## 📖 Overview
 
