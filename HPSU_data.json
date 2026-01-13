@@ -142792,17 +142792,17 @@
         "question": "Based on the voice, identify the speaker’s emotional transition.",
         "choice": [
             "from confused to frustration",
-            "from confused and worried to anger",
-            "from worried to despair",
+            "from worried to sadness",
+            "from worried to calm",
             "from calm to contentment"
         ],
         "attributes": {
-            "true": "from confused and worried to anger",
+            "true": "from worried to sadness",
             "similar": "from confused to frustration",
-            "middle": "from worried to despair",
+            "middle": "from worried to calm",
             "opposite": "from calm to contentment"
         },
-        "answer": "from confused and worried to anger",
+        "answer": "from worried to sadness",
         "source": "Celebv-HQ",
         "metric": "SC_type_eval",
         "type": "Single-Choice",
@@ -155299,18 +155299,18 @@
         "sub-category": "Mismatch Hard",
         "question": "According to the audio, what is the inconsistency between the emotional expression in the speaker's lines and their real emotional state?",
         "choice": [
-            "Transcript emotion is Happiness, actual emotion is Sadness.",
-            "Transcript emotion is Frustration, actual emotion is Excitement.",
             "Transcript emotion is Amusement, actual emotion is Sadness.",
+            "Transcript emotion is Frustration, actual emotion is Excitement.",
+            "Transcript emotion is Happiness, actual emotion is Sadness.",
             "Transcript emotion is Surprise, actual emotion is Loneliness."
         ],
         "attributes": {
-            "true": "Transcript emotion is Amusement, actual emotion is Sadness.",
-            "similar": "Transcript emotion is Happiness, actual emotion is Sadness.",
+            "true": "Transcript emotion is Happiness, actual emotion is Sadness.",
+            "similar": "Transcript emotion is Amusement, actual emotion is Sadness.",
             "middle": "Transcript emotion is Surprise, actual emotion is Loneliness.",
             "opposite": "Transcript emotion is Frustration, actual emotion is Excitement."
         },
-        "answer": "Transcript emotion is Amusement, actual emotion is Sadness.",
+        "answer": "Transcript emotion is Happiness, actual emotion is Sadness.",
         "source": "Celebv-HQ",
         "metric": "SC_type_eval",
         "type": "Single-Choice",
